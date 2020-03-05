@@ -1,6 +1,5 @@
 from tethys_sdk.base import TethysAppBase, url_map_maker
 
-
 class Danisaapp(TethysAppBase):
     """
     Tethys app class for Danisaapp.
@@ -31,9 +30,9 @@ class Danisaapp(TethysAppBase):
             ),
             UrlMap(
                 name='map',
-                url='danisaapp/map',
-                controller='danisaapp.controllers.map'
-            )
+                url='danisaapp/,
+                controller='danisaapp.controllers.home'
+            ),
         )
 
         return url_maps
