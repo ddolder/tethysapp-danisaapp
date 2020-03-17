@@ -71,13 +71,16 @@ def home(request):
         'next_button': next_button
     }
 
-    return render(request, 'danisaapp/home.html', context)
+    return render(request, 'soa_viewbuild/home.html', context)
 
-@login_required()
-def map(request):
-    """
-    Controller for the Map page.
-    """
-
+def instructions(request):
     context = {}
-    return render(request, 'danisaapp/map.html', context)
+    return render(request, 'soa_viewbuild/instructions.html', context)
+
+def proposal(request):
+    context = {}
+    return render(request, 'soa_viewbuild/proposal.html', context)
+
+def background(request):
+    context = {}
+    return render(request, 'soa_viewbuild/background.html', context)
