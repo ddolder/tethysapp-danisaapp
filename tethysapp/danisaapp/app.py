@@ -1,18 +1,19 @@
 from tethys_sdk.base import TethysAppBase, url_map_maker
 
-class Danisaapp(TethysAppBase):
+
+class SoaViewbuild(TethysAppBase):
     """
-    Tethys app class for Danisaapp.
+    Tethys app class for Soa Viewbuild.
     """
 
-    name = 'Danisaapp'
-    index = 'danisaapp:home'
-    icon = 'danisaapp/images/pluto.jpg'
-    package = 'danisaapp'
-    root_url = 'danisaapp'
-    color = '#9F2B68'
-    description = '"This is an app about myself"'
-    tags = ''
+    name = 'Soa Viewbuild'
+    index = 'soa_viewbuild:home'
+    icon = 'soa_viewbuild/images/icons_viewbuild.png'
+    package = 'soa_viewbuild'
+    root_url = 'soa-viewbuild'
+    color = '#27ae60'
+    description = '"This is an app to simulate the function viewshed in the city of New York. This was a project during the pandemia of the corona virus"'
+    tags = '"Viewshed", "CE 514" , "BYU", "Corona Virus"'
     enable_feedback = False
     feedback_emails = []
 
@@ -25,13 +26,23 @@ class Danisaapp(TethysAppBase):
         url_maps = (
             UrlMap(
                 name='home',
-                url='danisaapp',
-                controller='danisaapp.controllers.home'
+                url='soa-viewbuild',
+                controller='soa_viewbuild.controllers.home'
             ),
             UrlMap(
-                name='map',
-                url='danisaapp/,
-                controller='danisaapp.controllers.home'
+                name='instructions',
+                url='soa-viewbuild/instructions',
+                controller='soa_viewbuild.controllers.instructions'
+            ),
+            UrlMap(
+                name='proposal',
+                url='soa-viewbuild/proposal',
+                controller='soa_viewbuild.controllers.proposal'
+            ),
+             UrlMap(
+                name='background',
+                url='soa-viewbuild/background',
+                controller='soa_viewbuild.controllers.background'
             ),
         )
 
