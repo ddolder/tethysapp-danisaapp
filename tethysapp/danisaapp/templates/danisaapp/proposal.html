@@ -1,0 +1,109 @@
+{% extends "tethys_apps/app_base.html" %}
+
+{% load static %}
+
+{% block title %}{{ tethys_app.name }}{% endblock %}
+
+{% block app_icon %}
+  {# The path you provided in your app.py is accessible through the tethys_app.icon context variable #}
+  <img src="{% if 'http' in tethys_app.icon %}{{ tethys_app.icon }}{% else %}{% static tethys_app.icon %}{% endif %}" />
+{% endblock %}
+
+{# The name you provided in your app.py is accessible through the tethys_app.name context variable #}
+{% block app_title %}{{ tethys_app.name }}{% endblock %}
+
+{% block app_navigation_items %}
+  {% url 'soa_viewbuild:home' as home_url %}
+  {% url 'soa_viewbuild:instructions' as instructions_url %}
+  {% url 'soa_viewbuild:proposal' as proposal_url %}
+  {% url 'soa_viewbuild:background' as background_url %}
+  <li class="{% if request.path == home_url %}active{% endif %}"><a href="{{ home_url }}">About us</a></li>
+  <li class="{% if request.path == instructions_url %}active{% endif %}"><a href="{{ instructions_url }}">Instructions</a></li>
+  <li class="{% if request.path == proposal_url %}active{% endif %}"><a href="{{ proposal_url }}">Proposal</a></li>
+  <li class="{% if request.path == background_url %}active{% endif %}"><a href="{{ background_url }}">Background (Danisa)</a></li>
+
+  <!-- <li class="title">App Navigation</li>
+  <li class="active"><a href="">About us</a></li> -->
+  <li><a href="">Get Started</a></li>
+{% endblock %}
+
+{% block app_content %}
+
+
+  <TITLE>Project Proposal</TITLE>
+
+  <CENTER><H1>ViewBUILD Project Proposal</H1></CENTER>
+
+  <H2>App Purpose (HPA)</H2>
+
+  <P> City skylines are in a constant state of variation. Especially in cities with strong economies, new buildings go up and old buildings go down. Many areas, such as Seattle,  provide their residents with beautiful views of waterfronts and mountains. New building projects, however, often threaten to block the views of surrounding residents.
+
+  <CENTER><IMG SRC="{% static 'soa_viewbuild/images/seattle.jpg' %}" ALIGN="BOTTOM"> </CENTER>
+
+  <P>The purpose of this app is to show users how potential building projects might affect their surrounding views. Users will provide the app with their address of residence, as well as locations of potential building projects. The app will provide the user with a map that shows the views that will be blocked by the potential building.
+  </P>
+  <P> The app will be built on the Tethys platform, an app developer interface that is designed to be accessible for both developers and users.Using the Tethys platform allows non-experts to create and manipulate workflows and app functions.</P>
+
+  <H2>Vector and Raster Analysis</H2>
+
+  <P>A viewshed is the visible area from one or more observation points. An observation point can be a single point, polyline, or a polygon. For the analysis, elevation values from a DEM raster are required. In the specific case of this app, we also need the altitude of buildings and other structures that would block the visibility.
+
+  <H2>Map Services</H2>
+
+  <P>The National Map provides "...a seamless, continuously maintained set of public domain geographic base information that will serve as a foundation for integrating, sharing, and using other data easily and consistently" (National Geospatial Program, 2019).
+
+  <CENTER><IMG SRC="{% static 'soa_viewbuild/images/layers.jpg' %}" ALIGN="BOTTOM"> </CENTER>
+
+  <H2>Geoprocessing Workflow</H2>
+
+  <P>The app will be able to model how the view of a certain site will be affected by the construction of another building or projects. In order to do this we will use DEM data from certain location that will be stored locally in the app. This will be combined with a dataset of the heights of the different buildings in the selected city or town. The elevation of the current site will be also in the dataset of the different heights for the city or place. The data for the building heights will be vector point data. This data can be in a csv or geojson format. The DEM will be the raster data that can be in geotiff format, and it can be converted to a csv format in order to do the geoprocessing. The first step of the app will be to find the elevation of the user-input location from the DEM, and then input the desired number of stories and location of the potential building or house. The second step will be to find the different buildings that are close to the construction site using its location in latitude and longitude. Next, the height of such buildings surrounding the construction site will be stored, so they can be added to the data in the DEM csv in the desired latitude and longitude. Once the final height is found for the surrounding buildings, it is compared to the final height of the final building. This will be stored in an array of values that are taken from the difference between the surrounding buildings heights values to the desired building height. If the values are negative, it means that the view will be blocked. The third step will be to create an object that contains the values of the differences, assigning a color to negative values. The Final step will be to create buffers that have the colors from the objects to visualize if a building will have their view blocked. In addition, the app can be extended to be able to draw a polygon in the shape of a potential building, or to select the point of observation with a point on a map. If a polygon is created, then the geolocation of each corner can be stored and averaged in order to have an average latitude and longitude. Once the geolocation is know the geoprocessing can proceed.
+
+  <H2>Front-end User Interface</H2>
+
+  <P>The user interface will show the map and also options to draw a polygon for the building and place a point for the observation point. In addition, the app will let you enter the number of stories of the potential building, then the polygons to show if the views of the surrounding buildings will be affected.
+  <P>The polygons will be clickable if needed, so they can display data of about how many meters will be blocked by the construction of the new building.
+
+  <H2>Github</H2>
+
+  <P>GitHub is a global company that provides hosting for software development version control using Git. It is a subsidiary of Microsoft, which acquired the company in 2018 for $7.5 billion. It offers all of the distributed version control and source code management (SCM) functionality of Git as well as adding its own features. It provides access control and several collaboration features such as bug tracking, feature requests, task management, and wikis for every project.
+
+  <P>GitHub offers plans for free, professional, and enterprise accounts. Free GitHub accounts are commonly used to host open source projects. As of January 2019, GitHub offers unlimited private repositories to all plans, including free accounts. As of May 2019, GitHub reports having over 37 million users and more than 100 million repositories (including at least 28 million public repositories),making it the largest host of source code in the world.
+
+  <P>For this project our team decided to go ahead and use my github account for keeping the code which can be forked to other github accounts respectively and changes can be made accordingly on individual local systems and uploaded to the github subsequently.
+
+  <P>The code for this project is stored on the github account abu1995
+
+  <H2>Code Licencing</H2>
+
+  <P>I feel that they both may be very similar and doesn’t really differ as they both offer free open source licensing but however, we would probably be going ahead with GPL as General Public License (or GPL) is a ubiquitous open source software license. It places restrictions on distribution, in order to  guarantee end users the freedom to run, study, share and modify the software.
+
+  <P>Due to its universality, GPL is one of the most popular software licencing options. It is free and open sourced, allowing users to freely run, study, share, or modify the source code of the published program. Because we intend to make our published software free for public use, GPL will be our preferred licencing option.
+
+
+  <H2>Team Responsibilities</H2>
+
+  <ul>
+      <li>Hayden: Ensuring that the front-end works properly on the app </li>
+      <li>Gio: Ensuring that the  back-end works properly on the app</li>
+      <li>Danisa: Ensuring that Data is available for the different parts of the project</li>
+      <li>Abhishek: Ensuring that the viewshed tool functions properly and ensure smooth work flow on Git.</li>
+   </ul>
+
+
+  <HR>
+
+
+{% endblock %}
+
+{% block app_actions %}
+{% endblock %}
+
+{% block content_dependent_styles %}
+  {{ block.super }}
+  <link href="{% static 'soa_viewbuild/css/main.css' %}" rel="stylesheet"/>
+{% endblock %}
+
+{% block scripts %}
+  {{ block.super }}
+  <script src="{% static 'soa_viewbuild/js/main.js' %}" type="text/javascript"></script>
+{% endblock %}
