@@ -1,0 +1,70 @@
+{% extends "tethys_apps/app_base.html" %}
+
+{% load static %}
+
+{% block title %}{{ tethys_app.name }}{% endblock %}
+
+{% block app_icon %}
+  {# The path you provided in your app.py is accessible through the tethys_app.icon context variable #}
+  <img src="{% if 'http' in tethys_app.icon %}{{ tethys_app.icon }}{% else %}{% static tethys_app.icon %}{% endif %}" />
+{% endblock %}
+
+{# The name you provided in your app.py is accessible through the tethys_app.name context variable #}
+{% block app_title %}{{ tethys_app.name }}{% endblock %}
+
+{% block app_navigation_items %}
+{% url 'soa_viewbuild:home' as home_url %}
+{% url 'soa_viewbuild:instructions' as instructions_url %}
+{% url 'soa_viewbuild:proposal' as proposal_url %}
+<li class="{% if request.path == home_url %}active{% endif %}"><a href="{{ home_url }}">About us</a></li>
+<li class="{% if request.path == instructions_url %}active{% endif %}"><a href="{{ instructions_url }}">Instructions</a></li>
+<li class="{% if request.path == instructions_url %}active{% endif %}"><a href="{{ proposal_url }}">Proposal</a></li>
+
+<!-- <li class="title">App Navigation</li>
+<li class="active"><a href="">About us</a></li> -->
+<li><a href="">Get Started</a></li>
+{% endblock %}
+
+{% block app_content %}
+  <h1> How to use the Viewbuild</h1>
+  <p>View Build is a web app that lets youuse the viewshed function in New York city it has added the database of the
+  different heights and ground elevations of buildings. The app is pretty intuitive if you follow the next instructions that are depicted in the picture below</p>
+  <ul>
+    <img src="{% static 'soa_viewbuild/images/4.png' %}" width="50%" height="50%" style="margin-left:20%">
+
+    <h3> 1. Select a Base Point</h3>
+    <li style= "margin-left:2%"> The Base poin is the point in which the user is going to set the bench mark to see if the view points are avaible in the sight of the base point.
+      Viewshed analysis could estimate the impact of the addition of a large building. The viewshed analysis would show all the areas from which the building could be seen as well as any views that would be obscured from any particular location.</li>
+    <h3> 2. Select the view Points</h3>
+    <li style= "margin-left:2%">
+      The points that can be viewed from the base point are the viewing points in the Viewshed tool. Consider the point that you want to be viewed from the base point that you have selected in the city. Without the viewing point,
+      the tool doesn't run. The minimum number of viewing points required to run the tool is 2 points, so the observer can be viewed from the other points marked.
+    </li>
+    <h3> 3. Select a blocking Point</h3>
+    <li style= "margin-left:2%">
+      A blocking point is just another view point in the way of the view results of the existing base and view points. Its optional and is done only for a few purposes.
+
+    </li>
+    <h3> 4. Download or Upload</h3>
+    <li style= "margin-left:2%">
+      Select Download to copy the data in your computer.
+      Select Upload to share the data with HydroShare.
+    </li>
+
+
+  </ul>
+
+{% endblock %}
+
+{% block app_actions %}
+{% endblock %}
+
+{% block content_dependent_styles %}
+  {{ block.super }}
+  <link href="{% static 'soa_viewbuild/css/main.css' %}" rel="stylesheet"/>
+{% endblock %}
+
+{% block scripts %}
+  {{ block.super }}
+  <script src="{% static 'soa_viewbuild/js/main.js' %}" type="text/javascript"></script>
+{% endblock %}
